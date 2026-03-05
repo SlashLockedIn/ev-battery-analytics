@@ -26,7 +26,7 @@ def train_if_missing(project_dir: Path) -> None:
     if reg_path.exists() and clf_path.exists():
         return
 
-    data_path = project_dir / "data" / "raw" / "ev_battery_degradation_v1.csv"
+    data_path = project_dir / "data" / "ev_battery_degradation_v1.csv"
     if not data_path.exists():
         raise FileNotFoundError(f"Dataset missing at {data_path}. Needed to train models on startup.")
 
