@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.vscode/
+.env
+.DS_Store
+
+# large / unnecessary
+notebooks/
+data/  # optional: keep if you don't want data inside image (see note below)

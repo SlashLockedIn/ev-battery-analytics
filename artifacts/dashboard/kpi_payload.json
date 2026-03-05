@@ -1,0 +1,28 @@
+{
+    "fleet_health_kpis": {
+        "total_vehicles": 10000,
+        "average_soh_percent": 95.81,
+        "median_soh_percent": 96.5,
+        "soh_std_dev": 3.25,
+        "healthy_percent": 99.96,
+        "degraded_percent": 0.0,
+        "critical_percent": 0.0,
+        "low_soh_share_percent": 0.0,
+        "high_soh_share_percent": 93.95
+    },
+    "degradation_driver_kpis": {
+        "avg_charging_cycles": 457.02,
+        "median_charging_cycles": 400.0,
+        "avg_temperature_c": 25.07,
+        "hot_operation_share_percent": 10.78,
+        "avg_fast_charge_ratio": 0.5,
+        "high_fast_charge_share_percent": 49.69,
+        "avg_internal_resistance_ohm": 0.03136,
+        "high_internal_resistance_share_percent": 10.12
+    },
+    "operational_profile_kpis": {
+        "avg_discharge_rate_c": 1.49,
+        "aggressive_driving_share_percent": 19.39,
+        "avg_remaining_life_index": 60.09
+    }
+}

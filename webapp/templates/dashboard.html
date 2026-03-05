@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>EV Battery Analytics • KPI Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body class="bg">
+  <div class="shell">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">EV</div>
+        <div>
+          <div class="brand-title">EV Battery Analytics</div>
+          <div class="brand-sub">KPI Dashboard • SoH Degradation + Failure Risk</div>
+        </div>
+      </div>
+
+      <div class="top-actions">
+        <a class="btn ghost" href="/analytics">Analytics</a>
+        <a class="btn ghost" href="/dashboard">Refresh</a>
+        <a class="btn ghost" href="/predict">Predictions</a>
+      </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-head">
+      <h1>Executive KPI View</h1>
+      <p>
+        Monitoring battery health, stress drivers, and operational risk indicators.
+        Data sourced from your EV battery degradation dataset.
+      </p>
+    </section>
+
+    <!-- FLEET HEALTH -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Fleet Health KPIs</h2>
+          <p>Overall battery health and risk distribution across the fleet.</p>
+        </div>
+      </div>
+
+      <div class="grid kpi-grid">
+        <div class="card kpi">
+          <div class="kpi-label">Total Vehicles</div>
+          <div class="kpi-value">{{ kpis.fleet_health_kpis.total_vehicles }}</div>
+          <div class="kpi-foot">Unique Vehicle_ID</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Average SoH</div>
+          <div class="kpi-value">{{ kpis.fleet_health_kpis.average_soh_percent }}%</div>
+          <div class="kpi-foot">Mean battery health</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Median SoH</div>
+          <div class="kpi-value">{{ kpis.fleet_health_kpis.median_soh_percent }}%</div>
+          <div class="kpi-foot">Robust central value</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">SoH Variability</div>
+          <div class="kpi-value">{{ kpis.fleet_health_kpis.soh_std_dev }}</div>
+          <div class="kpi-foot">Std dev (health spread)</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Low-SoH Share</div>
+          <div class="kpi-value">{{ kpis.fleet_health_kpis.low_soh_share_percent }}%</div>
+          <div class="kpi-foot">SoH &lt; 70%</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">High-SoH Share</div>
+          <div class="kpi-value">{{ kpis.fleet_health_kpis.high_soh_share_percent }}%</div>
+          <div class="kpi-foot">SoH ≥ 90%</div>
+        </div>
+      </div>
+
+      <div class="grid three">
+        <div class="card badge ok">
+          <div class="badge-title">Healthy</div>
+          <div class="badge-value">{{ kpis.fleet_health_kpis.healthy_percent }}%</div>
+          <div class="badge-sub">Operationally safe segment</div>
+        </div>
+        <div class="card badge warn">
+          <div class="badge-title">Degraded</div>
+          <div class="badge-value">{{ kpis.fleet_health_kpis.degraded_percent }}%</div>
+          <div class="badge-sub">Performance decline segment</div>
+        </div>
+        <div class="card badge danger">
+          <div class="badge-title">Critical</div>
+          <div class="badge-value">{{ kpis.fleet_health_kpis.critical_percent }}%</div>
+          <div class="badge-sub">High failure risk segment</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEGRADATION DRIVERS -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Degradation Driver KPIs</h2>
+          <p>Key operational stressors linked to SoH decline and failure risk.</p>
+        </div>
+      </div>
+
+      <div class="grid kpi-grid">
+        <div class="card kpi">
+          <div class="kpi-label">Avg Charging Cycles</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.avg_charging_cycles }}</div>
+          <div class="kpi-foot">Mean usage intensity</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Median Charging Cycles</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.median_charging_cycles }}</div>
+          <div class="kpi-foot">Typical battery usage</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Avg Temperature</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.avg_temperature_c }}°C</div>
+          <div class="kpi-foot">Thermal baseline</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Hot Operation Share</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.hot_operation_share_percent }}%</div>
+          <div class="kpi-foot">Temp ≥ 35°C</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Avg Fast Charge Ratio</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.avg_fast_charge_ratio }}</div>
+          <div class="kpi-foot">0–1 usage behavior</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">High Fast-Charge Share</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.high_fast_charge_share_percent }}%</div>
+          <div class="kpi-foot">Ratio ≥ 0.5</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">Avg Internal Resistance</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.avg_internal_resistance_ohm }}</div>
+          <div class="kpi-foot">Ohm (aging indicator)</div>
+        </div>
+
+        <div class="card kpi">
+          <div class="kpi-label">High Resistance Share</div>
+          <div class="kpi-value">{{ kpis.degradation_driver_kpis.high_internal_resistance_share_percent }}%</div>
+          <div class="kpi-foot">≥ P90 (top 10%)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OPERATIONAL PROFILE -->
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <h2>Operational Profile KPIs</h2>
+          <p>Driving/usage behavior and proxy for remaining battery life.</p>
+        </div>
+      </div>
+
+      <div class="grid two">
+        <div class="card kpi big">
+          <div class="kpi-label">Avg Discharge Rate (C)</div>
+          <div class="kpi-value">{{ kpis.operational_profile_kpis.avg_discharge_rate_c }}</div>
+          <div class="kpi-foot">Higher discharge accelerates wear</div>
+        </div>
+
+        <div class="card kpi big">
+          <div class="kpi-label">Aggressive Driving Share</div>
+          <div class="kpi-value">{{ kpis.operational_profile_kpis.aggressive_driving_share_percent }}%</div>
+          <div class="kpi-foot">Behavior-linked degradation risk</div>
+        </div>
+      </div>
+
+      <div class="card highlight">
+        <div class="highlight-left">
+          <div class="highlight-title">Estimated Remaining Life Index</div>
+          <div class="highlight-sub">Proxy score based on cycles, temperature, fast-charging, and resistance.</div>
+        </div>
+        <div class="highlight-right">
+          <div class="highlight-value">{{ kpis.operational_profile_kpis.avg_remaining_life_index }}</div>
+          <div class="highlight-unit">/ 100</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <span>Local Flask Dashboard</span>
+      <span class="dot">•</span>
+      <span>Payload: artifacts/dashboard/kpi_payload.json</span>
+    </footer>
+
+  </div>
+</body>
+</html>
