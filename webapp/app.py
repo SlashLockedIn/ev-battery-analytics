@@ -4,7 +4,7 @@ import json
 
 import pandas as pd
 import numpy as np
-
+from webapp.train_models import train_if_missing
 from flask import Flask, render_template, request
 
 import plotly.express as px
@@ -105,7 +105,7 @@ def get_pipelines():
 
     # If models missing, train them now (Render-safe)
     if (not REG_MODEL_PATH.exists()) or (not CLF_MODEL_PATH.exists()):
-        from train_models import train_if_missing
+        from webapp.train_models import train_if_missing
         train_if_missing(PROJECT_DIR)
 
     # Load after training (or if already present)
