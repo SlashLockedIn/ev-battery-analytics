@@ -23,4 +23,4 @@ EXPOSE 5000
 
 # Run with gunicorn (production)
 # IMPORTANT: app:app -> app.py has "app = Flask(...)"
-CMD ["sh", "-c", "gunicorn -w 2 -b 0.0.0.0:${PORT:-5000} webapp.app:app"]
+CMD ["sh", "-c", "gunicorn -w 1 --timeout 180 -b 0.0.0.0:${PORT:-5000} webapp.app:app"]
